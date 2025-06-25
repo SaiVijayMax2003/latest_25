@@ -335,6 +335,11 @@ async function updateOrderPaymentStatus(student_id, payment_status, user = null,
     // Add modified_at timestamp
     const updateData = { payment_status, modified_at: new Date() };
 
+    await Student.updateOne(
+        { student_id: Number(student_id) },
+        { $set: { verification_status: payment_status } }
+    );  
+
     // If status is changing to "verified", also update onboarding_status to "Needs Schedule"
     if (payment_status === 'verified') {
         updateData.onboarding_status = 'Needs Schedule';
