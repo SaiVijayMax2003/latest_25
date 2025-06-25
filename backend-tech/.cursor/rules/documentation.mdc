@@ -1,0 +1,15 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# API Documentation Guide
+
+API documentation is auto-generated using OpenAPI (Swagger) via Fastify plugins.
+
+- **Swagger Setup**: See [`src/app.js`](mdc:src/app.js) and [`src/index.js`](mdc:src/index.js) for Swagger and Swagger UI registration.
+- **Route Documentation**: Each route should include OpenAPI schema definitions for requests and responses. Add these in your route files (e.g., [`src/modules/otp/otp.routes.js`](mdc:src/modules/otp/otp.routes.js)).
+- **Accessing Docs**: In development, visit `/documentation` for the Swagger UI.
+- **Conventions**: Follow the examples and conventions in [`HowToWriteAPI.md`](mdc:HowToWriteAPI.md).
+
+All new APIs must be documented with OpenAPI 3.0 schemas.

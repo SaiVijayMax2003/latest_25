@@ -1,0 +1,120 @@
+{
+  "project": {
+    "name": "backend-tech",
+    "type": "nodejs",
+    "framework": "fastify",
+    "database": "mongodb",
+    "queue": "redis"
+  },
+  "structure": {
+    "src": {
+      "config": "Configuration files and environment setup",
+      "controllers": "Route controllers handling business logic",
+      "models": "Mongoose models and schemas",
+      "routes": "API route definitions",
+      "services": "Business logic and external service integrations",
+      "utils": "Utility functions and helpers",
+      "plugins": "Fastify plugins and extensions",
+      "middlewares": "Custom middleware functions",
+      "queues": "Redis queue handlers and processors"
+    },
+    "tests": "Test files following Jest structure",
+    "docs": "API documentation and project documentation"
+  },
+  "guidelines": {
+    "api": {
+      "versioning": "Use semantic versioning for API endpoints",
+      "documentation": "All routes must be documented with OpenAPI 3.0",
+      "error_handling": "Use standardized error responses",
+      "validation": "Validate all input data"
+    },
+    "testing": {
+      "coverage": "Maintain 80%+ test coverage",
+      "structure": "Follow AAA pattern (Arrange, Act, Assert)",
+      "naming": "Test files should end with .test.js"
+    },
+    "security": {
+      "authentication": "Use JWT for authentication",
+      "authorization": "Implement role-based access control",
+      "secrets": "Never commit sensitive data",
+      "validation": "Validate all user input"
+    },
+    "performance": {
+      "caching": "Use Redis for caching where appropriate",
+      "queue": "Use Redis queues for long-running tasks",
+      "metrics": "Implement Prometheus metrics"
+    }
+  },
+  "dependencies": {
+    "core": [
+      "fastify",
+      "mongoose",
+      "redis",
+      "bull"
+    ],
+    "auth": [
+      "@fastify/jwt",
+      "bcryptjs"
+    ],
+    "documentation": [
+      "@fastify/swagger",
+      "@fastify/swagger-ui"
+    ],
+    "monitoring": [
+      "fastify-metrics",
+      "prom-client"
+    ]
+  },
+  "folderStructure": {
+    "required": true,
+    "pattern": {
+      "services": "src/services/[feature-name]/[feature]Service.js",
+      "routes": "src/routes/[feature-name]/[feature]Routes.js",
+      "utils": {
+        "validation": "src/utils/validation/[feature]Validation.js",
+        "helpers": "src/utils/helpers/[feature]Helper.js"
+      },
+      "tests": {
+        "unit": "tests/unit/services/[feature]Service.test.js",
+        "integration": "tests/integration/[feature].test.js"
+      }
+    },
+    "message": "New features must follow the established folder structure. See HowToWriteAPI.md for details."
+  },
+  "projectStructure": {
+    "required": true,
+    "pattern": {
+      "modules": {
+        "pattern": "src/modules/[module-name]/",
+        "files": [
+          "[module-name].routes.js",
+          "[module-name].controller.js",
+          "[module-name].service.js",
+          "[module-name].schema.js",
+          "__tests__/unit/[module-name].service.test.js",
+          "__tests__/integration/[module-name].integration.test.js"
+        ]
+      },
+      "config": "src/config/[config-name].js",
+      "utils": "src/utils/[utility-name].js"
+    }
+  },
+  "testing": {
+    "required": true,
+    "coverage": {
+      "minimum": 80,
+      "branches": 80,
+      "functions": 80,
+      "lines": 80
+    },
+    "types": [
+      "unit",
+      "integration"
+    ]
+  },
+  "documentation": {
+    "required": true,
+    "autoGenerate": true,
+    "swagger": true
+  }
+} 

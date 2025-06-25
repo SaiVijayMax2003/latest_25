@@ -1,0 +1,18 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# MongoDB Usage Guide
+
+MongoDB is integrated using Mongoose. The main connection logic is in [`src/db/mongo.js`](mdc:src/db/mongo.js).
+
+## Key Points
+- **Connection**: Use `connectToMongo()` to initialize the MongoDB connection. This is called in the main application entry points ([`src/app.js`](mdc:src/app.js), [`src/index.js`](mdc:src/index.js)).
+- **Disconnection**: Use `disconnectFromMongo()` for graceful shutdown.
+- **Schemas/Models**: Define Mongoose schemas and models in each module as needed.
+- **Environment Variable**: Set `MONGODB_URI` in your environment for the connection string.
+
+## Example Usage
+- See [`src/db/mongo.js`](mdc:src/db/mongo.js) for connection logic.
+- Place your Mongoose models in the appropriate module or in a shared models directory if reused.

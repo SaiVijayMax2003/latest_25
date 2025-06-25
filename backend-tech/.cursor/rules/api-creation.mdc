@@ -1,0 +1,19 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# API Creation Guide
+
+To create a new API endpoint, follow these steps:
+
+1. **Module Structure**: Create a new subdirectory under [`src/modules/`](mdc:src/modules) for your feature.
+2. **Files to Add**:
+   - `[feature].routes.js`: Define Fastify routes and register handlers.
+   - `[feature].controller.js`: Implement route handler logic.
+   - `[feature].service.js`: Business logic and data access.
+   - `[feature].schema.js`: Validation schemas for requests/responses.
+3. **Register Routes**: Add your route file to [`src/routes/index.js`](mdc:src/routes/index.js) using Fastify's `register` method.
+4. **Testing**: Add unit and integration tests in a `__tests__/` subdirectory.
+
+See [`HowToWriteAPI.md`](mdc:HowToWriteAPI.md) for detailed conventions and examples.

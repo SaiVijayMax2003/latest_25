@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Redis Usage Guide
+
+Redis is integrated into the project primarily through [`src/db/redis.js`](mdc:src/db/redis.js). This file provides the main connection logic, lifecycle management, and a utility to access the Redis client throughout the codebase.
+
+## Key Points
+- **Connection**: Use `connectToRedis()` to initialize the Redis connection. This is called in the main application entry points ([`src/app.js`](mdc:src/app.js), [`src/index.js`](mdc:src/index.js)).
+- **Disconnection**: Use `disconnectFromRedis()` for graceful shutdown.
+- **Access**: Use `getRedisClient()` to retrieve the Redis client instance. This function checks if Redis is enabled via the `REDIS_ENABLED` environment variable and ensures the client is initialized.
+- **Logging**: Logging is handled via the [`logger`](mdc:src/utils/logger.js) utility.
+- **OTP Service**: The [`src/modules/otp/otp.service.js`](mdc:src/modules/otp/otp.service.js) module uses Redis to store and verify OTPs. If Redis is disabled, it falls back to an in-memory store.
+
+## Environment Variables
+- `REDIS_ENABLED`: Set to `false` (case-insensitive) to disable Redis.
+- `REDIS_HOST`, `REDIS_PORT`, `REDIS_PASSWORD`: Used for connection configuration.
+
+## Deprecated/Unused
+- [`src/utils/redis.js`](mdc:src/utils/redis.js) is a CommonJS module for Redis that is not used anywhere in the current codebase and can be ignored.
+
+## Example Usage
+- To store or retrieve data from Redis, always use `getRedisClient()` after ensuring `connectToRedis()` has been called at startup.
+- For OTP logic, see the usage in [`otp.service.js`](mdc:src/modules/otp/otp.service.js).

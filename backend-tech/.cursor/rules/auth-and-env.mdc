@@ -1,0 +1,77 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Authentication and Environment Configuration
+
+## Environment Variables
+Required environment variables in `.env.development`:
+
+```env
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# MongoDB Configuration
+MONGODB_URI=mongodb://localhost:27017/your_database_name
+
+# JWT Configuration
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=7d
+
+# CORS Configuration
+CORS_ORIGIN=http://localhost:5173  # For Vite frontend
+# CORS_ORIGIN=http://localhost:3000  # For other frontend setups
+
+# LLM Configuration (Optional)
+LLM_ENABLED=false
+OPENAI_API_KEY=your_openai_api_key  # Required if LLM_ENABLED=true
+```
+
+## Authentication Flow
+
+### User Creation
+1. POST `/users`
+   - Requires `unique_token: "3223"`
+   - Body: `{ name, role, password, unique_token }`
+   - Returns: `{ user, token }`
+
+### User Login
+1. POST `/users/login`
+   - Body: `{ username, password }`
+   - Returns: `{ user, token }`
+
+### Protected Routes
+- All routes except `/users/login` and `/users` (create) require JWT authentication
+- Add `Authorization: Bearer <token>` header to requests
+- Token contains user role for authorization
+
+## CORS Configuration
+- Configured in [app.js](mdc:src/app.js)
+- Default setup allows:
+  - Origin: From CORS_ORIGIN env variable
+  - Methods: GET, PUT, POST, DELETE, OPTIONS
+  - Headers: Content-Type, Authorization
+  - Credentials: true
+
+## Role-Based Access
+Available roles:
+- `admin`: Full access
+- `tutor`: Tutor-specific access
+- `student`: Student-specific access
+
+## Security Features
+1. Rate Limiting: 100 requests per minute
+2. Helmet.js for security headers
+3. JWT token expiration
+4. Password hashing
+5. Role-based authorization
+
+## Example Protected Request
+```bash
+curl -X POST http://localhost:3000/users/modify \
+  -H "Authorization: Bearer <your_jwt_token>" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Updated Name"}'
+```

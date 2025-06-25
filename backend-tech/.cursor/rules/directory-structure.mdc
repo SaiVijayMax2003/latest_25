@@ -1,0 +1,25 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Directory Structure Guide
+
+The project follows a modular structure under the `src/` directory. Key directories and their purposes:
+
+- [`src/config/`](mdc:src/config): Configuration files and environment setup
+- [`src/db/`](mdc:src/db): Database connection logic (MongoDB, Redis)
+- [`src/modules/`](mdc:src/modules): Feature modules, each with its own routes, controller, service, and schema
+- [`src/routes/`](mdc:src/routes): API route definitions and registration
+- [`src/utils/`](mdc:src/utils): Utility functions and helpers
+- [`src/middleware/`](mdc:src/middleware): Custom middleware functions
+
+## Feature Organization
+Each feature/module should be placed in its own subdirectory under [`src/modules/`](mdc:src/modules), containing:
+- `[feature].routes.js`
+- `[feature].controller.js`
+- `[feature].service.js`
+- `[feature].schema.js`
+- `__tests__/` (unit and integration tests)
+
+Refer to [`HowToWriteAPI.md`](mdc:HowToWriteAPI.md) for more details on adding new features.
